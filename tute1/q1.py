@@ -11,6 +11,7 @@ class Solution:
 	# a() implements the required solution with a worst case time complexity of 
 	# O(n*logn) + O(n) = O(n*logn)
 	def a(self, array, x):
+		# edge case handling
 		if not array:
 			return False 
 
@@ -37,8 +38,44 @@ class Solution:
 		# then the array does not contain such elements summing up to x
 		return False
 
+	# Solution b() provides an average case O(n) solutions through the usage of 
+	# dictionaries (hash maps in python)
+	def b(self, array, x):
+		# edge case handling
+		if not array:
+			return False 
+
+		if len(array) < 2:
+			return False
+
+		# begin solution
+		complements = {}
+		count = {}
+		# we store the difference between each element to the target in the complements array. 
+		# we also keep track of count of elements so we can utilise the same number twice if necessary 
+		# and check against count dictionary
+		for element in array:
+			complements[element] = abs(x-element)
+			count.setdefault(element, 0)
+			count[element] += 1
+
+		# for each complement, check whether it is in the array or the keys which represent array elements
+		for key in complements:
+			# if a key is the same as its complement then we might produce a false positive by reusing the same element
+			# hence if count of that element is 
+			if complements[key] in complements:
+				if key == complements[key]:
+					if count[key] > 1:
+						return True
+					else:
+						continue
+
+				return True
+
+		return False
 
 
 sol = Solution()
-ans = sol.a([1,2,3,65,43,-1,23,2], 100)
-print(ans)
+array = [1,2,-1]
+print(sol.a(array, 0))
+print(sol.b(array, 0))
