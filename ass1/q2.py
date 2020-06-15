@@ -4,10 +4,15 @@
 # nuts : [3, 1, 5, 2, 6, 4]
 # bolts: [5, 6, 2, 4, 1, 3]
 
-# def func(nuts, bolts):
+
+# function quickPair(nuts, bolts):
 # 	hashmap maps Nut-> Bolt
+#   if nuts and bolts only have one element left in them:
+#		hashmap[nuts[0]] = bolts[0] 
+#   
 # 	pivotNut = nuts[0]
 
+#	This loop will be O(n) as we only iterate through bolts once
 # 	for bolt in bolts:
 # 		if bolt is smaller than pivotNut:
 # 			add bolt to smaller
@@ -17,16 +22,26 @@
 # 			pivotBolt = bolt 
 # 			hashmap[pivotNut] = pivotBolt
 
+#   This loop will be O(n) as we only iterate through nuts once
 # 	for nut in nuts:
 # 		if doesn't fit in pivotBolt:
 # 			append nut to smallerNuts
 # 		else:
 # 			append nut to biggerNuts
 
-# 	func(smallerNuts, smallerBolts, hashmap)
-# 	func(biggerNuts, biggerBolts, hashmap)
+
+# 	quickPair(smallerNuts, smallerBolts, hashmap)
+# 	quickPair(biggerNuts, biggerBolts, hashmap)
 
 # 	return hashmap
+
+# We see that a single call to this function is O(n) + O(n) = O(2n) = O(n)
+# We essentially divide the array everytime and each segment takes O(n) so we get 
+# O(logn) * O(n) = O(n*logn)
+# This function is also derived from the quicksort algorithm with no extra overhead 
+# so, that adds to the proof that this function will run in expected time of O(nlogn). 
+# However, in the worst case (nuts already ordered ascending or descending)
+# it will run in O(n^2). 
 
 
 
